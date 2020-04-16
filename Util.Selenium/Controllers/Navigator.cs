@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using Util.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -10,17 +9,11 @@ namespace AprendendoSelenium.Controller
 {
     public class Navigator
     {
-        //public Navigator(IWebDriver webDriver)
-        //{
-        //    ChromeOptions driverOptions = new ChromeOptions();
-        //    driverOptions.AddArgument("--disable-extensions");
-        //    driverOptions.AddArgument("disable-infobars");
-        //    driverOptions.AddArgument("--silent");
-        //    driverOptions.AddArgument("--incognito");
-        //    DriverProperties._driver = new ChromeDriver(System.AppDomain.CurrentDomain.BaseDirectory, driverOptions);
-        //}
+        public Navigator()
+        { 
+        }
 
-        public static void Navigate(string url)
+    public static void Navigate(string url)
         {
             DriverProperties._driver.Navigate().GoToUrl(url);
             Console.WriteLine("Carregado site com sucesso");

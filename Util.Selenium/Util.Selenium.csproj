@@ -57,11 +57,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DriverProperties.cs" />
-    <Compile Include="LoginPageObject.cs" />
-    <Compile Include="Navigator.cs" />
-    <Compile Include="Enums.cs" />
-    <Compile Include="PageObject.cs" />
+    <Compile Include="Controllers\NavigatorExtensionMethods.cs" />
+    <Compile Include="Utilities\DriverProperties.cs" />
+    <Compile Include="PageObjects\LoginPageObject.cs" />
+    <Compile Include="Controllers\Navigator.cs" />
+    <Compile Include="Utilities\Enums.cs" />
+    <Compile Include="PageObjects\HomePageObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -69,6 +70,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
