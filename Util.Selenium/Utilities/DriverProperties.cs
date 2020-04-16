@@ -14,6 +14,7 @@ namespace Util.Selenium
             driverOptions.AddArgument("disable-infobars");
             driverOptions.AddArgument("--silent");
             driverOptions.AddArgument("--incognito");
+            //driverOptions.AddArgument("--headless");
             DriverProperties._driver = new ChromeDriver(System.AppDomain.CurrentDomain.BaseDirectory, driverOptions);
         }
     }
