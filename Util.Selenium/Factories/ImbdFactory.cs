@@ -14,6 +14,12 @@ namespace Util.Selenium.Factories
             {
                 Console.WriteLine($"----- Inicío busca do filme ({nomeFilme}) -----");
 
+                if (string.IsNullOrEmpty(nomeFilme))
+                {
+                    Console.WriteLine($"----- Valor informado irregular -----");
+                    return null;
+                }
+
                 HomePageObject home = new HomePageObject();
                 NavigatorExtensionMethods.Navigate(home.Url());
                 var buscado = home.Buscar(nomeFilme);

@@ -7,7 +7,7 @@ namespace Util.Selenium.Models
     {
         public Movie()
         {
-            Atores = new List<string>();
+            Atores = new Dictionary<string, string>();
             Pais = new List<string>();
             Lingua = new List<string>();
             Generos = new List<string>();
@@ -26,7 +26,7 @@ namespace Util.Selenium.Models
         public decimal? BilheteriaEUA { get; set; }
         public string Produtora { get; set; }
         public string Distribuidora { get; set; }
-        public List<string> Atores { get; set; }
+        public Dictionary<string, string> Atores { get; set; }
         public List<string> Pais { get; set; }
         public List<string> Lingua { get; set; }
         public List<string> Generos { get; set; }

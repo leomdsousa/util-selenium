@@ -37,20 +37,49 @@ namespace Util.Selenium.PageObjects
 
                 Movie movie = new Movie();
 
-                movie.Nome = Nome.Text.Split(Nome.Text.ToCharArray().Where(x => x.ToString().Equals("(")).FirstOrDefault()).First().Trim();
-                movie.NotaMedia = Convert.ToDecimal(Nota.Text);
-                movie.QuantidadeNotas = Convert.ToDecimal(QuantidadeNotas.Text);
-                movie.AnoLancamento = Nome.Text.Split(Nome.Text.ToCharArray().Where(x => x.ToString().Equals("(")).FirstOrDefault()).Last().Replace(")", "").Replace("(", "").Trim();
-                movie.Diretor = Diretor.Text;
-                movie.Escritor = Escritor.Text;
-                //movie.Atores = Atores;
-                //movie.Pais = Paises;
-                //movie.Atores = Idiomas;
-                movie.Sinopse = Sinopse.Text;
-                //movie.Generos = Generos;
-                movie.Orcamento = Convert.ToDecimal(Regex.Replace(Orcamento.Text, @"(\D)", string.Empty));
-                movie.Bilheteria = Convert.ToDecimal(Regex.Replace(Receita.Text, @"(\D)", string.Empty));
-                movie.BilheteriaEUA = Convert.ToDecimal(Regex.Replace(ReceitaUSA.Text, @"(\D)", string.Empty));
+                if (Nome != null)
+                    movie.Nome = Nome.Text.Split(Nome.Text.ToCharArray().Where(x => x.ToString().Equals("(")).FirstOrDefault()).First().Trim();
+
+                if(Nota != null)
+                    movie.NotaMedia = Convert.ToDecimal(Nota.Text);
+
+                if (QuantidadeNotas != null)
+                    movie.QuantidadeNotas = Convert.ToDecimal(QuantidadeNotas.Text);
+                
+                if (Nome != null)
+                    movie.AnoLancamento = Nome.Text.Split(Nome.Text.ToCharArray().Where(x => x.ToString().Equals("(")).FirstOrDefault()).Last().Replace(")", "").Replace("(", "").Trim();
+                
+                if (Diretor != null)
+                    movie.Diretor = Diretor.Text;
+
+                if (Escritor != null)
+                    movie.Escritor = Escritor.Text;
+
+                if (Atores != null)
+                    Atores?.ToList().ForEach(x => movie.Atores.Add(
+                                                    x.Text.Split(new string[] { "..." }, StringSplitOptions.None).First(),
+                                                    x.Text.Split(new string[] { "..." }, StringSplitOptions.None).Last()));
+
+                if (Paises != null)
+                    Paises?.ToList().ForEach(x => movie.Pais.Add(x.Text));
+                
+                if (Idiomas != null)
+                    Idiomas?.ToList().ForEach(x => movie.Lingua.Add(x.Text));
+                
+                if (Generos != null)
+                    Generos?.ToList().ForEach(x => movie.Generos.Add(x.Text));
+
+                if (Sinopse != null)
+                    movie.Sinopse = Sinopse.Text;
+                
+                if (Orcamento != null)
+                    movie.Orcamento = Convert.ToDecimal(Regex.Replace(Orcamento.Text, @"(\D)", string.Empty));
+
+                if (Receita != null)
+                    movie.Bilheteria = Convert.ToDecimal(Regex.Replace(Receita.Text, @"(\D)", string.Empty));
+
+                if (ReceitaUSA != null)
+                    movie.BilheteriaEUA = Convert.ToDecimal(Regex.Replace(ReceitaUSA.Text, @"(\D)", string.Empty));
 
                 Console.WriteLine($"----- Finalização método LeituraDadosMovie() -----");
                 return movie;
@@ -61,6 +90,7 @@ namespace Util.Selenium.PageObjects
                 throw ex;
             }
         }
+        
         public bool ExibirDadosMovie(Movie movie)
         {
             try
@@ -69,22 +99,24 @@ namespace Util.Selenium.PageObjects
 
                 Console.WriteLine($"----- Dados Filme: -----");
 
-                Console.WriteLine($"----- Nome: {movie.Nome} -----");
-                Console.WriteLine($"----- Nota: {movie.NotaMedia} -----");
-                Console.WriteLine($"----- Avaliações: {movie.QuantidadeNotas} -----");
-                Console.WriteLine($"----- Ano Lançamento: {movie.AnoLancamento} -----");
-                Console.WriteLine($"----- Diretor: {movie.Diretor} -----");
-                Console.WriteLine($"----- Escritor: {movie.Escritor} -----");
+                Console.WriteLine($"----- Nome: {movie.Nome ?? "Não encontrado"} -----");
+                Console.WriteLine($"----- Nota: {movie.NotaMedia.Value.ToString() ?? "Não encontrado"} -----");
+                Console.WriteLine($"----- Avaliações: {movie.QuantidadeNotas.Value.ToString() ?? "Não encontrado"} -----");
+                Console.WriteLine($"----- Ano Lançamento: {movie.AnoLancamento ?? "Não encontrado"} -----");
+                Console.WriteLine($"----- Diretor: {movie.Diretor ?? "Não encontrado"} -----");
+                Console.WriteLine($"----- Escritor: {movie.Escritor ?? "Não encontrado"} -----");
 
                 foreach(var ator in movie.Atores)
                 {
-                    Console.WriteLine($"----- Ator: {ator} - Personagem: {ator} -----");
+                    if(!string.IsNullOrEmpty(ator.Key))
+                        Console.WriteLine($"----- Ator: {ator.Key} - Personagem: {ator.Value} -----");
                 }
 
                 string paises = string.Empty;
                 foreach (var pais in movie.Pais)
                 {
-                    paises += pais;
+                    if(!string.IsNullOrEmpty(pais))
+                        paises += pais;
                 }
 
                 if(!string.IsNullOrEmpty(paises))
@@ -93,22 +125,24 @@ namespace Util.Selenium.PageObjects
                 string idiomas = string.Empty;
                 foreach (var idioma in movie.Lingua)
                 {
-                    idiomas += idioma;
+                    if (!string.IsNullOrEmpty(idioma))
+                        idiomas += idioma;
                 }
 
                 if (!string.IsNullOrEmpty(idiomas))
                     Console.WriteLine($"----- Países: {idiomas} -----");
 
-                Console.WriteLine($"----- Sinopse: {movie.Sinopse} -----");
+                Console.WriteLine($"----- Sinopse: {movie.Sinopse ?? "Não encontrado"} -----");
 
-                Console.WriteLine($"----- Orçamento: {movie.Orcamento} -----");
-                Console.WriteLine($"----- Bilheteria: {movie.Bilheteria} -----");
-                Console.WriteLine($"----- Bilheteria (USA): {movie.BilheteriaEUA} -----");
+                Console.WriteLine($"----- Orçamento: {movie.Orcamento.Value.ToString() ?? "Não encontrado"} -----");
+                Console.WriteLine($"----- Bilheteria: {movie.Bilheteria.Value.ToString() ?? "Não encontrado"} -----");
+                Console.WriteLine($"----- Bilheteria (USA): {movie.BilheteriaEUA.Value.ToString() ?? "Não encontrado"} -----");
 
                 string generos = string.Empty;
                 foreach (var genero in movie.Generos)
                 {
-                    generos += genero;
+                    if (!string.IsNullOrEmpty(genero))
+                        generos += genero;
                 }
 
                 if (!string.IsNullOrEmpty(generos))

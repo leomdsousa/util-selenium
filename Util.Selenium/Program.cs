@@ -9,9 +9,13 @@ namespace Util.Selenium
         {
             Console.WriteLine("----- Início Processo -----");
 
+            Console.WriteLine("----- Infore um filme na qual deseja ver informações: -----");
+
+            var filmeEscolhido = Console.ReadLine();
+
             Driver.Instantiate(BrowserType.Chrome);
             ImbdFactory _imbdFactory = new ImbdFactory();
-            _imbdFactory.BuscarFilme("...E o Vento Levou");
+            _imbdFactory.BuscarFilme(filmeEscolhido);
 
             Console.WriteLine("----- Fim Processo -----");
         }
