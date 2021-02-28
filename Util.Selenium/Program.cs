@@ -1,11 +1,5 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Util.Selenium.PageObjects;
+﻿using System;
+using Util.Selenium.Factories;
 
 namespace Util.Selenium
 {
@@ -13,24 +7,13 @@ namespace Util.Selenium
     {
         static void Main(string[] args)
         {
-            DriverProperties.Instantiate();
-            Program.ProcessoBuscarFilme("...E o Vento Levou");
-        }
+            Console.WriteLine("----- Início Processo -----");
 
-        public static void ProcessoBuscarFilme(string filme)
-        {
-            HomePageObject home = new HomePageObject();
-            home.Open();
-            var buscado = home.Buscar(filme);
+            Driver.Instantiate(BrowserType.Chrome);
+            ImbdFactory _imbdFactory = new ImbdFactory();
+            _imbdFactory.BuscarFilme("...E o Vento Levou");
 
-            if (!buscado)
-                return;
-
-            ResultadoPesquisaPageObject resultado = new ResultadoPesquisaPageObject();
-            resultado.EscolherFilme(filme);
-
-            MoviePageObject movie = new MoviePageObject();
-            var dados = movie.LeituraDadosMovie();
+            Console.WriteLine("----- Fim Processo -----");
         }
     }
 }

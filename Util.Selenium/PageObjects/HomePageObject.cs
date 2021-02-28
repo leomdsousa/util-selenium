@@ -1,51 +1,37 @@
 ﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace Util.Selenium
 {
     public class HomePageObject
     {
-        public HomePageObject()
-        {
+        private static readonly string url = "https://www.imdb.com/";
+        private IWebElement BarraPesquisa => Driver._driver.FindElement(By.Id("suggestion-search"));
+        private IWebElement BotaoPesquisa => Driver._driver.FindElement(By.Id("suggestion-search-button"));
 
-        }
-
-        public HomePageObject(string url)
-        {
-            Open(url);
-        }
-
-        public void Open(string url)
-        {
-            DriverProperties._driver.Navigate().GoToUrl(url);
-        }
-
-        public void Open()
-        {
-            DriverProperties._driver.Navigate().GoToUrl(url);
-        }
-
+        public HomePageObject() { }
         public bool Buscar(string search)
         {
             try
             {
+                Console.WriteLine($"----- Início método Buscar({search}) -----");
+
                 BarraPesquisa.SendKeys(search);
                 BotaoPesquisa.Click();
+
+                Console.WriteLine($"----- Finalização método Buscar({search}) -----");
 
                 return true;
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"----- Erro método Buscar({search}) -----");
                 throw ex;
             }
         }
-
-        //PROPERTIES
-        private const string url = "https://www.imdb.com/";
-        private IWebElement BarraPesquisa => DriverProperties._driver.FindElement(By.Id("suggestion-search"));
-        private IWebElement BotaoPesquisa => DriverProperties._driver.FindElement(By.Id("suggestion-search-button"));
-
-
+        public string Url()
+        {
+            return url;
+        }
     }
 }

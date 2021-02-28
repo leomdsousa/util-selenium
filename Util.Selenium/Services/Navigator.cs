@@ -1,11 +1,10 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using Util.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Util.Selenium;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
-namespace AprendendoSelenium.Controller
+namespace Util.Selenium.Services
 {
     public class Navigator
     {
@@ -15,82 +14,77 @@ namespace AprendendoSelenium.Controller
 
     public static void Navigate(string url)
         {
-            DriverProperties._driver.Navigate().GoToUrl(url);
+            Driver._driver.Navigate().GoToUrl(url);
             Console.WriteLine("Carregado site com sucesso");
         }
-        [TearDown]
         public static void Close()
         {
-            DriverProperties._driver.Close();
+            Driver._driver.Close();
             Console.WriteLine("Fechado com sucesso");
         }
-
-        //SETTTERS METHODS
         public static void Escreve(string element, string text, ElementTag elementTag)
         {
             if (elementTag == ElementTag.Id)
-                DriverProperties._driver.FindElement(By.Id(element)).SendKeys(text);
+                Driver._driver.FindElement(By.Id(element)).SendKeys(text);
             if (elementTag == ElementTag.Name)
-                DriverProperties._driver.FindElement(By.Name(element)).SendKeys(text);
+                Driver._driver.FindElement(By.Name(element)).SendKeys(text);
             if (elementTag == ElementTag.Class)
-                DriverProperties._driver.FindElement(By.ClassName(element)).SendKeys(text);
+                Driver._driver.FindElement(By.ClassName(element)).SendKeys(text);
 
             Console.WriteLine("Digitado com sucesso");
         }
         public static void Clica(string element, ElementTag elementTag)
         {
             if (elementTag == ElementTag.Id)
-                DriverProperties._driver.FindElement(By.Id(element)).Click();
+                Driver._driver.FindElement(By.Id(element)).Click();
             if (elementTag == ElementTag.Name)
-                DriverProperties._driver.FindElement(By.Name(element)).Click();
+                Driver._driver.FindElement(By.Name(element)).Click();
             if (elementTag == ElementTag.Class)
-                DriverProperties._driver.FindElement(By.ClassName(element)).Click();
+                Driver._driver.FindElement(By.ClassName(element)).Click();
 
             Console.WriteLine("Clicado com sucesso");
         }
         public static void SelecionaDropDown(string element, string textoSelecionado, ElementTag elementTag)
         {
             if (elementTag == ElementTag.Id)
-                new SelectElement(DriverProperties._driver.FindElement(By.Id(element))).SelectByText(textoSelecionado);
+                new SelectElement(Driver._driver.FindElement(By.Id(element))).SelectByText(textoSelecionado);
             if (elementTag == ElementTag.Name)
-                new SelectElement(DriverProperties._driver.FindElement(By.Name(element))).SelectByText(textoSelecionado);
+                new SelectElement(Driver._driver.FindElement(By.Name(element))).SelectByText(textoSelecionado);
             if (elementTag == ElementTag.Class)
-                new SelectElement(DriverProperties._driver.FindElement(By.ClassName(element))).SelectByText(textoSelecionado);
+                new SelectElement(Driver._driver.FindElement(By.ClassName(element))).SelectByText(textoSelecionado);
 
             Console.WriteLine("Selecionado com sucesso");
         }
-
-        //GETTERS METHODS
         public static string GetValue(string element, string textoSelecionado, ElementTag elementTag)
         {
             if (elementTag == ElementTag.Id)
-                return DriverProperties._driver.FindElement(By.Id(element)).GetAttribute("value");
+                return Driver._driver.FindElement(By.Id(element)).GetAttribute("value");
             if (elementTag == ElementTag.Name)
-                return DriverProperties._driver.FindElement(By.Name(element)).GetAttribute("value");
+                return Driver._driver.FindElement(By.Name(element)).GetAttribute("value");
             if (elementTag == ElementTag.Class)
-                return DriverProperties._driver.FindElement(By.ClassName(element)).GetAttribute("value");
+                return Driver._driver.FindElement(By.ClassName(element)).GetAttribute("value");
 
             return String.Empty;
         }
         public static string GetTextFromTag(string element, ElementTag elementTag)
         {
             if (elementTag == ElementTag.Id)
-                return DriverProperties._driver.FindElement(By.Id(element)).Text;
+                return Driver._driver.FindElement(By.Id(element)).Text;
             if (elementTag == ElementTag.Name)
-                return DriverProperties._driver.FindElement(By.Name(element)).Text;
+                return Driver._driver.FindElement(By.Name(element)).Text;
             if (elementTag == ElementTag.Class)
-                return DriverProperties._driver.FindElement(By.ClassName(element)).Text;
+                return Driver._driver.FindElement(By.ClassName(element)).Text;
 
             return String.Empty;
         }
         public static string GetValueFromDropDown(string element, ElementTag elementTag)
         {
             if (elementTag == ElementTag.Id)
-                return new SelectElement(DriverProperties._driver.FindElement(By.Id(element))).SelectedOption.Text;
+                return new SelectElement(Driver._driver.FindElement(By.Id(element))).SelectedOption.Text;
             if (elementTag == ElementTag.Name)
-                return new SelectElement(DriverProperties._driver.FindElement(By.Name(element))).SelectedOption.Text;
+                return new SelectElement(Driver._driver.FindElement(By.Name(element))).SelectedOption.Text;
             if (elementTag == ElementTag.Class)
-                return new SelectElement(DriverProperties._driver.FindElement(By.ClassName(element))).SelectedOption.Text;
+                return new SelectElement(Driver._driver.FindElement(By.ClassName(element))).SelectedOption.Text;
 
             return String.Empty;
         }
@@ -100,7 +94,7 @@ namespace AprendendoSelenium.Controller
 
             if (elementTag == ElementTag.Id)
             {
-                foreach (var item in new SelectElement(DriverProperties._driver.FindElement(By.Id(element))).Options)
+                foreach (var item in new SelectElement(Driver._driver.FindElement(By.Id(element))).Options)
                 {
                     valuesList.Add(item.Text);
                 }
@@ -110,7 +104,7 @@ namespace AprendendoSelenium.Controller
 
             if (elementTag == ElementTag.Name)
             {
-                foreach (var item in new SelectElement(DriverProperties._driver.FindElement(By.Name(element))).Options)
+                foreach (var item in new SelectElement(Driver._driver.FindElement(By.Name(element))).Options)
                 {
                     valuesList.Add(item.Text);
                 }
@@ -119,7 +113,7 @@ namespace AprendendoSelenium.Controller
             }
             if (elementTag == ElementTag.Class)
             {
-                foreach (var item in new SelectElement(DriverProperties._driver.FindElement(By.ClassName(element))).Options)
+                foreach (var item in new SelectElement(Driver._driver.FindElement(By.ClassName(element))).Options)
                 {
                     valuesList.Add(item.Text);
                 }
@@ -132,22 +126,22 @@ namespace AprendendoSelenium.Controller
         public static IList<IWebElement> GetSelectedObjectFromDropDown(string element, ElementTag elementTag)
         {
             if (elementTag == ElementTag.Id)
-                return new SelectElement(DriverProperties._driver.FindElement(By.Id(element))).AllSelectedOptions;
+                return new SelectElement(Driver._driver.FindElement(By.Id(element))).AllSelectedOptions;
             if (elementTag == ElementTag.Name)
-                return new SelectElement(DriverProperties._driver.FindElement(By.Name(element))).AllSelectedOptions;
+                return new SelectElement(Driver._driver.FindElement(By.Name(element))).AllSelectedOptions;
             if (elementTag == ElementTag.Class)
-                return new SelectElement(DriverProperties._driver.FindElement(By.ClassName(element))).AllSelectedOptions;
+                return new SelectElement(Driver._driver.FindElement(By.ClassName(element))).AllSelectedOptions;
 
             return null;
         }
         public static IList<IWebElement> GetAllObjectsFromDropDown(string element, ElementTag elementTag)
         {
             if (elementTag == ElementTag.Id)
-                return new SelectElement(DriverProperties._driver.FindElement(By.Id(element))).Options;
+                return new SelectElement(Driver._driver.FindElement(By.Id(element))).Options;
             if (elementTag == ElementTag.Name)
-                return new SelectElement(DriverProperties._driver.FindElement(By.Name(element))).Options;
+                return new SelectElement(Driver._driver.FindElement(By.Name(element))).Options;
             if (elementTag == ElementTag.Class)
-                return new SelectElement(DriverProperties._driver.FindElement(By.ClassName(element))).Options;
+                return new SelectElement(Driver._driver.FindElement(By.ClassName(element))).Options;
 
             return null;
         }

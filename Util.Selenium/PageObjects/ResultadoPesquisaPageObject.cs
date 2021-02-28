@@ -7,24 +7,14 @@ namespace Util.Selenium.PageObjects
 {
     public class ResultadoPesquisaPageObject
     {
+        private IWebElement Home => Driver._driver.FindElement(By.Id("home_img_holder"));
+        private IEnumerable<IWebElement>  Filmes => Driver._driver.FindElements(By.XPath("//*[@id='main']/div/div[2]/table/tbody/tr"));
+        private IWebElement FindMore => Driver._driver.FindElement(By.ClassName("findMoreMatches"));
 
         public ResultadoPesquisaPageObject()
         {
             
         }
-
-        //PROPERTIES
-        private IWebElement Home => DriverProperties._driver.FindElement(By.Id("home_img_holder"));
-        private IEnumerable<IWebElement>  Filmes => DriverProperties._driver.FindElements(By.XPath("//*[@id='main']/div/div[2]/table/tbody/tr"));
-        private IWebElement FindMore => DriverProperties._driver.FindElement(By.ClassName("findMoreMatches"));
-
-
-        //METHODS
-        public void Open(string url)
-        {
-            DriverProperties._driver.Navigate().GoToUrl(url);
-        }
-
         public bool MenuPrincipal()
         {
             try
@@ -37,7 +27,6 @@ namespace Util.Selenium.PageObjects
                 return false;
             }
         }
-
         public bool ProcurarMais()
         {
             try
@@ -50,11 +39,12 @@ namespace Util.Selenium.PageObjects
                 return false;
             }
         }
-
         public bool EscolherFilme(string nome)
         {
             try
             {
+                Console.WriteLine($"----- Início método EscolherFilme({nome}) -----");
+
                 foreach (var item in Filmes.Where(x => x.Text.Contains(nome)))
                 {
                     if(!item.TagName.Equals("a"))
@@ -64,13 +54,17 @@ namespace Util.Selenium.PageObjects
                     }
 
                     item.Click();
+
+                    Console.WriteLine($"----- Finalização método EscolherFilme({nome}) - Sucesso -----");
                     return true;
                 }
 
+                Console.WriteLine($"----- Finalização método EscolherFilme({nome}) - Sem Sucesso -----");
                 return false;
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"----- Erro método EscolherFilme({nome}) -----");
                 throw ex;
             }
         }
