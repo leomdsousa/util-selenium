@@ -9,57 +9,30 @@ using System.Threading.Tasks;
 
 namespace Util.Selenium
 {
-    class LoginPageObject
+    public class LoginPageObject
     {
         //CONSTRUCTOR
-
         public LoginPageObject()
         {
         }
 
         //PROPERTIES
-
-        public string url = "https://ead.cursodefrancesonline.com.br/login/index.php";
-        IWebElement User => DriverProperties._driver.FindElement(By.Id("username"));
-        IWebElement Password => DriverProperties._driver.FindElement(By.Id("password"));
-        IWebElement RememberPassword => DriverProperties._driver.FindElement(By.XPath("//*[@id='login']/div[3]/label"));
-        IWebElement LoginButton => DriverProperties._driver.FindElement(By.Id("loginbtn"));
+        private const string url = "https://www.imdb.com/";
+        private IWebElement User => DriverProperties._driver.FindElement(By.Id("ap_email"));
+        private IWebElement Password => DriverProperties._driver.FindElement(By.Id("ap_password"));
+        private IWebElement SignInSubmit => DriverProperties._driver.FindElement(By.Id("signInSubmit"));
 
 
         //METHODS
-
         public void Open()
         {
             DriverProperties._driver.Navigate().GoToUrl(url);
         }
-        public void Login(string username, string password, bool rememberPassword)
+        public void Login(string username, string password)
         {
             User.SendKeys(username);
             Password.SendKeys(password);
-
-            if (rememberPassword && !RememberPassword.Selected)
-                RememberPassword.Click();
-
-            LoginButton.Click();
-        }
-        
-        #region MODO DEPRECIADO DE INICIALIZAR A PAGE OBJECT
-        //public LoginPageObject()
-        //{
-        //    PageFactory.InitElements(DriverProperties._driver, this);
-        //}
-
-        //[FindsBy(How = How.Id, Using = "username")]
-        //public IWebElement User { get; set; }
-
-        //[FindsBy(How = How.Id, Using = "password")]
-        //public IWebElement Password { get; set; }
-
-        //[FindsBy(How = How.XPath, Using = "//*[@id='login']/div[3]/label")]
-        //public IWebElement RememberPassword { get; set; }
-
-        //[FindsBy(How = How.Id, Using = "loginbtn")]
-        //public IWebElement LoginButton { get; set; } 
-        #endregion
+            SignInSubmit.Click();
+        }     
     }
 }

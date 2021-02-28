@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Util.Selenium.PageObjects;
 
 namespace Util.Selenium
 {
@@ -13,15 +14,23 @@ namespace Util.Selenium
         static void Main(string[] args)
         {
             DriverProperties.Instantiate();
-            Program.Teste();
+            Program.ProcessoBuscarFilme("...E o Vento Levou");
         }
 
-        [Test]
-        public static void Teste()
+        public static void ProcessoBuscarFilme(string filme)
         {
-            LoginPageObject loginPageObject = new LoginPageObject();
-            loginPageObject.Open();
-            loginPageObject.Login("leonardomdsousa@gmail.com", "IfespCfo123*", false);
+            HomePageObject home = new HomePageObject();
+            home.Open();
+            var buscado = home.Buscar(filme);
+
+            if (!buscado)
+                return;
+
+            ResultadoPesquisaPageObject resultado = new ResultadoPesquisaPageObject();
+            resultado.EscolherFilme(filme);
+
+            MoviePageObject movie = new MoviePageObject();
+            var dados = movie.LeituraDadosMovie();
         }
     }
 }
