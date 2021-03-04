@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 
-namespace Util.Selenium
+namespace Util.Selenium.PageObjects
 {
     public class HomePageObject
     {

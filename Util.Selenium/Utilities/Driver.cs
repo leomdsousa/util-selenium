@@ -60,7 +60,7 @@ namespace Util.Selenium
             {
                 Console.WriteLine("----- Erro ao inicializar Driver -----");
                 Console.WriteLine("--------------------------------------");
-                throw;
+                throw ex;
             }
         }
     }
