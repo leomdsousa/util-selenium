@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Util.Selenium;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -8,15 +7,6 @@ namespace Util.Selenium.Services
 {
     public static class NavigatorExtensionMethods
     {
-        //public NavigatorExtensionMethods(IWebDriver webDriver)
-        //{
-        //    ChromeOptions driverOptions = new ChromeOptions();
-        //    driverOptions.AddArgument("--disable-extensions");
-        //    driverOptions.AddArgument("disable-infobars");
-        //    driverOptions.AddArgument("--silent");
-        //    driverOptions.AddArgument("--incognito");
-        //    Driver._driver = new ChromeDriver(System.AppDomain.CurrentDomain.BaseDirectory, driverOptions);
-        //}
         public static void Navigate(string url)
         {
             Driver._driver.Navigate().GoToUrl(url);
@@ -27,29 +17,14 @@ namespace Util.Selenium.Services
             Driver._driver.Close();
             Console.WriteLine("Fechado com sucesso");
         }
-        //SETTTERS METHODS
-        /// <summary>
-        /// Writing in a element passed
-        /// </summary>
-        /// <param name="webElement"></param>
-        /// <param name="text"></param>
         public static void Escreve(this IWebElement webElement, string text)
         {
             webElement.SendKeys(text);
         }
-        /// <summary>
-        /// Clicking in a element passed
-        /// </summary>
-        /// <param name="webElement"></param>
         public static void Clica(this IWebElement webElement)
         {
             webElement.Click();
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="webElement"></param>
-        /// <param name="textoSelecionado"></param>
         public static void SelecionaDropDown(this IWebElement webElement, string textoSelecionado)
         {
                 new SelectElement(webElement).SelectByText(textoSelecionado);

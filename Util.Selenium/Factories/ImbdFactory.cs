@@ -13,24 +13,29 @@ namespace Util.Selenium.Factories
             try
             {
                 Console.WriteLine($"----- Inicío busca do filme ({nomeFilme}) -----");
+                Console.WriteLine($"----------------------------------------  -----");
 
                 if (string.IsNullOrEmpty(nomeFilme))
                 {
                     Console.WriteLine($"----- Valor informado irregular -----");
+                    Console.WriteLine($"----------------------------------------  -----");
                     return null;
                 }
 
-                HomePageObject home = new HomePageObject();
+                HomePageObject home = new HomePageObject(Driver._driver);
                 NavigatorExtensionMethods.Navigate(home.Url());
-                var buscado = home.Buscar(nomeFilme);
+                var resultadoPesquisa = home.Buscar(nomeFilme);
 
-                if (!buscado)
+                if (resultadoPesquisa == null)
                     return null;
 
-                ResultadoPesquisaPageObject resultado = new ResultadoPesquisaPageObject();
-                resultado.EscolherFilme(nomeFilme);
+                ResultadoPesquisaPageObject resultado = new ResultadoPesquisaPageObject(Driver._driver);
+                var retuladoMovie = resultado.EscolherFilme(nomeFilme);
 
-                MoviePageObject movie = new MoviePageObject();
+                if (retuladoMovie == null)
+                    return null;
+
+                MoviePageObject movie = new MoviePageObject(Driver._driver);
                 Movie dadosFilme = movie.LeituraDadosMovie();
                 var exibido = movie.ExibirDadosMovie(dadosFilme);
                 
@@ -42,6 +47,7 @@ namespace Util.Selenium.Factories
             catch (Exception ex)
             {
                 Console.WriteLine($"----- Erro ao buscar filme ({nomeFilme}) -----");
+                Console.WriteLine($"----------------------------------------  -----");
                 throw ex;
             }
         }

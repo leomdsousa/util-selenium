@@ -9,31 +9,33 @@ namespace Util.Selenium.PageObjects
 {
     public class MoviePageObject
     {
-        private IWebElement Nome => Driver._driver.FindElement(By.ClassName("title_wrapper")).FindElement(By.XPath("h1"));
-        private IWebElement Nota => Driver._driver.FindElement(By.ClassName("ratingValue")).FindElement(By.XPath("strong[1]/span[1]"));
-        private IWebElement QuantidadeNotas => Driver._driver.FindElement(By.ClassName("imdbRating")).FindElement(By.XPath("a[1]"));        
+        private IWebDriver _driver;
+        private IWebElement Nome => _driver.FindElement(By.ClassName("title_wrapper")).FindElement(By.XPath("h1"));
+        private IWebElement Nota => _driver.FindElement(By.ClassName("ratingValue")).FindElement(By.XPath("strong[1]/span[1]"));
+        private IWebElement QuantidadeNotas => _driver.FindElement(By.ClassName("imdbRating")).FindElement(By.XPath("a[1]"));        
         
-        //private IWebElement DataLancamento => Driver._driver.FindElement(By.ClassName("title_wrapper")).FindElement(By.XPath("h1"));
-        private IWebElement Diretor => Driver._driver.FindElement(By.XPath("(//div[@class='credit_summary_item'])[1]/a[1]"));
-        private IWebElement Escritor => Driver._driver.FindElement(By.XPath("(//div[@class='credit_summary_item'])[2]/a[1]"));
-        private IEnumerable<IWebElement> Atores => Driver._driver.FindElement(By.ClassName("cast_list")).FindElements(By.XPath("(//tr[@class='odd']) | (//tr[@class='even'])"));
-        private IEnumerable<IWebElement> Paises => Driver._driver.FindElement(By.Id("titleDetails")).FindElements(By.XPath("div[3]/a"));
-        private IEnumerable<IWebElement> Idiomas => Driver._driver.FindElement(By.Id("titleDetails")).FindElements(By.XPath("div[3]/a"));
-        private IWebElement Sinopse => Driver._driver.FindElement(By.Id("titleStoryLine")).FindElement(By.XPath("div[1]/p[1]"));
-        private IEnumerable<IWebElement> Generos => Driver._driver.FindElement(By.Id("titleDetails")).FindElements(By.XPath("div[4]/a"));
-        private IWebElement Orcamento => Driver._driver.FindElement(By.Id("titleDetails")).FindElement(By.XPath("div[7]"));
-        private IWebElement ReceitaUSA => Driver._driver.FindElement(By.Id("titleDetails")).FindElement(By.XPath("div[9]"));
-        private IWebElement Receita => Driver._driver.FindElement(By.Id("titleDetails")).FindElement(By.XPath("div[10]"));
+        //private IWebElement DataLancamento => _driver.FindElement(By.ClassName("title_wrapper")).FindElement(By.XPath("h1"));
+        private IWebElement Diretor => _driver.FindElement(By.XPath("(//div[@class='credit_summary_item'])[1]/a[1]"));
+        private IWebElement Escritor => _driver.FindElement(By.XPath("(//div[@class='credit_summary_item'])[2]/a[1]"));
+        private IEnumerable<IWebElement> Atores => _driver.FindElement(By.ClassName("cast_list")).FindElements(By.XPath("(//tr[@class='odd']) | (//tr[@class='even'])"));
+        private IEnumerable<IWebElement> Paises => _driver.FindElement(By.Id("titleDetails")).FindElements(By.XPath("div[3]/a"));
+        private IEnumerable<IWebElement> Idiomas => _driver.FindElement(By.Id("titleDetails")).FindElements(By.XPath("div[3]/a"));
+        private IWebElement Sinopse => _driver.FindElement(By.Id("titleStoryLine")).FindElement(By.XPath("div[1]/p[1]"));
+        private IEnumerable<IWebElement> Generos => _driver.FindElement(By.Id("titleDetails")).FindElements(By.XPath("div[4]/a"));
+        private IWebElement Orcamento => _driver.FindElement(By.Id("titleDetails")).FindElement(By.XPath("div[7]"));
+        private IWebElement ReceitaUSA => _driver.FindElement(By.Id("titleDetails")).FindElement(By.XPath("div[9]"));
+        private IWebElement Receita => _driver.FindElement(By.Id("titleDetails")).FindElement(By.XPath("div[10]"));
 
-        public MoviePageObject()
+        public MoviePageObject(IWebDriver driver)
         {
-
+            _driver = driver;
         }
         public Movie LeituraDadosMovie()
         {
             try
             {
                 Console.WriteLine($"----- Início método LeituraDadosMovie() -----");
+                Console.WriteLine($"---------------------------------------------");
 
                 Movie movie = new Movie();
 
@@ -82,22 +84,25 @@ namespace Util.Selenium.PageObjects
                     movie.BilheteriaEUA = Convert.ToDecimal(Regex.Replace(ReceitaUSA.Text, @"(\D)", string.Empty));
 
                 Console.WriteLine($"----- Finalização método LeituraDadosMovie() -----");
+                Console.WriteLine($"--------------------------------------------------");
                 return movie;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"----- Erro método LeituraDadosMovie() -----");
+                Console.WriteLine($"-------------------------------------------");
                 throw ex;
             }
         }
-        
         public bool ExibirDadosMovie(Movie movie)
         {
             try
             {
                 Console.WriteLine($"----- Início método ExibirDadosMovie() -----");
+                Console.WriteLine($"--------------------------------------------");
 
                 Console.WriteLine($"----- Dados Filme: -----");
+                Console.WriteLine($"--------------------------------------------");
 
                 Console.WriteLine($"----- Nome: {movie.Nome ?? "Não encontrado"} -----");
                 Console.WriteLine($"----- Nota: {movie.NotaMedia.Value.ToString() ?? "Não encontrado"} -----");
@@ -149,12 +154,14 @@ namespace Util.Selenium.PageObjects
                     Console.WriteLine($"----- Gênetos: {generos} -----");
 
                 Console.WriteLine($"----- Finalização método ExibirDadosMovie() -----");
+                Console.WriteLine($"--------------------------------------------");
 
                 return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"----- Erro método ExibirDadosMovie() -----");
+                Console.WriteLine($"--------------------------------------------");
                 throw ex;
             }
         }

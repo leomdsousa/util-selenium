@@ -8,8 +8,10 @@ namespace Util.Selenium
         static void Main(string[] args)
         {
             Console.WriteLine("----- Início Processo -----");
+            Console.WriteLine("---------------------------");
 
             Console.WriteLine("----- Infore um filme na qual deseja ver informações: -----");
+            Console.WriteLine("-----------------------------------------------------------");
 
             var filmeEscolhido = Console.ReadLine();
 
@@ -18,6 +20,7 @@ namespace Util.Selenium
             _imbdFactory.BuscarFilme(filmeEscolhido);
 
             Console.WriteLine("----- Fim Processo -----");
+            Console.WriteLine("------------------------");
         }
     }
 }

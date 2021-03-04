@@ -15,10 +15,12 @@ namespace Util.Selenium
             try
             {
                 Console.WriteLine("----- Inicializando Driver -----");
+                Console.WriteLine("--------------------------------");
 
-                if(browserType == BrowserType.Chrome)
+                if (browserType == BrowserType.Chrome)
                 {
                     Console.WriteLine("----- Driver: Chrome -----");
+                    Console.WriteLine("--------------------------");
 
                     ChromeOptions chromeOptions = new ChromeOptions();
                     chromeOptions.AddArgument("--disable-extensions");
@@ -31,6 +33,7 @@ namespace Util.Selenium
                 else if(browserType == BrowserType.InternetExplorer)
                 {
                     Console.WriteLine("----- Driver: Internet Explorer -----");
+                    Console.WriteLine("-------------------------------------");
 
                     InternetExplorerOptions ieOptions = new InternetExplorerOptions();
                     ieOptions.BrowserAttachTimeout = new TimeSpan(0, 5, 0);
@@ -39,6 +42,7 @@ namespace Util.Selenium
                 else if(browserType == BrowserType.Firefox)
                 {
                     Console.WriteLine("----- Driver: Firefox -----");
+                    Console.WriteLine("---------------------------");
 
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
                     firefoxOptions.AddArgument("--disable-extensions");
@@ -50,10 +54,12 @@ namespace Util.Selenium
                 }
 
                 Console.WriteLine("----- Inicialização do Driver concluída -----");
+                Console.WriteLine("---------------------------------------------");
             }
             catch (Exception ex)
             {
                 Console.WriteLine("----- Erro ao inicializar Driver -----");
+                Console.WriteLine("--------------------------------------");
                 throw;
             }
         }
