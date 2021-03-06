@@ -46,7 +46,7 @@ namespace Util.Selenium.PageObjects
                     movie.NotaMedia = Convert.ToDecimal(Nota.Text);
 
                 if (QuantidadeNotas != null)
-                    movie.QuantidadeNotas = Convert.ToDecimal(QuantidadeNotas.Text);
+                    movie.QuantidadeNotas = Convert.ToDecimal(QuantidadeNotas.Text.Replace(" ", "").Trim());
                 
                 if (Nome != null)
                     movie.AnoLancamento = Nome.Text.Split(Nome.Text.ToCharArray().Where(x => x.ToString().Equals("(")).FirstOrDefault()).Last().Replace(")", "").Replace("(", "").Trim();

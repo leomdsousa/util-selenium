@@ -27,17 +27,8 @@ namespace Util.Selenium
                     chromeOptions.AddArgument("disable-infobars");
                     chromeOptions.AddArgument("--silent");
                     chromeOptions.AddArgument("--incognito");
-                    //chromeOptions.AddArgument("--headless");
+                    chromeOptions.AddArgument("--headless");
                     Driver._driver = new ChromeDriver(AppDomain.CurrentDomain.BaseDirectory, chromeOptions);
-                }
-                else if(browserType == BrowserType.InternetExplorer)
-                {
-                    Console.WriteLine("----- Driver: Internet Explorer -----");
-                    Console.WriteLine("-------------------------------------");
-
-                    InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-                    ieOptions.BrowserAttachTimeout = new TimeSpan(0, 5, 0);
-                    Driver._driver = new InternetExplorerDriver(AppDomain.CurrentDomain.BaseDirectory, ieOptions);
                 }
                 else if(browserType == BrowserType.Firefox)
                 {
@@ -47,9 +38,8 @@ namespace Util.Selenium
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
                     firefoxOptions.AddArgument("--disable-extensions");
                     firefoxOptions.AddArgument("disable-infobars");
-                    firefoxOptions.AddArgument("--silent");
                     firefoxOptions.AddArgument("--incognito");
-                    //driverOptions.AddArgument("--headless");
+                    firefoxOptions.AddArgument("--headless");
                     Driver._driver = new FirefoxDriver(AppDomain.CurrentDomain.BaseDirectory, firefoxOptions);
                 }
 

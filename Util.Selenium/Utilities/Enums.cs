@@ -17,9 +17,6 @@
     public enum BrowserType
     {
         Chrome,
-        Mozilla,
-        Firefox,
-        InternetExplorer,
-        Edge
+        Firefox
     }
 }

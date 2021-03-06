@@ -15,7 +15,7 @@ namespace Util.Selenium
 
             var filmeEscolhido = Console.ReadLine();
 
-            Driver.Instantiate(BrowserType.Chrome);
+            Driver.Instantiate(BrowserType.Firefox);
             ImbdFactory _imbdFactory = new ImbdFactory();
             _imbdFactory.BuscarFilme(filmeEscolhido);
 
