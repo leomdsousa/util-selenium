@@ -1,5 +1,13 @@
 # util-selenium
 
-# pesquisa e leitura de filme através de web scrapping/web crawler no site do IMBD
+## Descrição do Projeto
+<p align="center">Projeto console application que executa webscrapping/webcrawler no site da IMDB</p>
+<p align="center">a fim de retornar os dados de filme selecionado pelo usuário</p>
 
-# console-application
+### 🛠 Tecnologias
+
+As seguintes ferramentas/bibiotecas foram usadas na construção do projeto:
+
+- Selenium
+- NUnit (Unit Tests)
+- Moq
