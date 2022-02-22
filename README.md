@@ -1,8 +1,8 @@
 # util-selenium
 
 ## Descrição do Projeto
-<p align="center">Projeto console application que executa webscrapping/webcrawler no site da IMDB</p>
-<p align="center">a fim de retornar os dados de filme selecionado pelo usuário</p>
+Projeto console application que executa webscrapping/webcrawler no site da IMDB
+a fim de retornar os dados de filme selecionado pelo usuário
 
 ### 🛠 Tecnologias
 
